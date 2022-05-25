@@ -32,8 +32,24 @@ pause
 choco install git
 choco install python
 choco install nodejs
+choco install rust
+choco install marp-cli
+choco install rust
+choco install rustup.install
+choco install vim
+
+pause
 
 @REM PROGRAMS
 
 choco install vscode.install
 choco install 7zip
+choco install steam-client
+choco install epicgameslauncher
+choco install zotero
+choco install gimp
+choco install googlechrome
+
+@REM UPGRADES ALL PACKAGES
+
+choco upgrade all
