@@ -30,6 +30,7 @@ pause
 @REM PROGRAMMING LANGUAGES
 
 choco install git
+choco install gh
 choco install python
 choco install nodejs
 choco install rust
@@ -67,4 +68,7 @@ pip install pdf-cli
 
 @REM MAKE SYBMBOLIK LINKS FOR FILES
 
-git clone 
+gh auth login
+gh repo clone ArthurMartelli/.dotfiles
+
+py ".dotfiles\setup.py"
