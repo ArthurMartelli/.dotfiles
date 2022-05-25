@@ -64,7 +64,7 @@ choco upgrade all
 
 @REM PIP INSTALLATIONS
 
-pip install pdf-cli
+pip install pdfcli
 
 @REM MAKE SYBMBOLIK LINKS FOR FILES
 
