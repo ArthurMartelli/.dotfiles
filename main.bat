@@ -27,6 +27,8 @@ pause
 
 @REM ----[ Whatever you want to install, place it below this point, each item on its own line (to make it easier to find later on. ] ----
 
+call RefreshEnv.cmd
+
 @REM PROGRAMMING LANGUAGES
 
 choco install git
@@ -43,30 +45,39 @@ choco install wsl-ubuntu-2004
 choco install docker
 choco install docker-desktop
 choco install docker-machine
+choco install sass
+choco install autohotkey
 
 pause
 
 @REM PROGRAMS
 
+choco install googlechrome
 choco install vscode.install
-choco install 7zip
 choco install steam-client
 choco install epicgameslauncher
-choco install zotero
 choco install gimp
-choco install googlechrome
+choco install zotero
+choco install 7zip
+choco install unrar
+choco install microsoft-office-deployment
 
 pause
 
 @REM UPGRADES ALL PACKAGES
 
+call RefreshEnv.cmd
 choco upgrade all
 
 @REM PIP INSTALLATIONS
 
+pause
+
 pip install pdfcli
 
 @REM MAKE SYBMBOLIK LINKS FOR FILES
+
+pause
 
 gh auth login
 gh repo clone ArthurMartelli/.dotfiles
