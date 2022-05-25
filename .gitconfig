@@ -1,0 +1,10 @@
+[core]
+	editor = \"C:\\Users\\Arthur\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = Arthur Martelli
+	email = 66151338+ArthurMartelli@users.noreply.github.com
