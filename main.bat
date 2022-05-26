@@ -28,6 +28,14 @@ pause
 @REM ----[ Whatever you want to install, place it below this point, each item on its own line (to make it easier to find later on. ] ----
 
 call RefreshEnv.cmd
+choco install chocolatey
+choco install chocolatey-compatibility.extension
+choco install chocolatey-core.extension
+choco install chocolatey-dotnetfx.extension
+choco install chocolatey-misc-helpers.extension
+choco install chocolatey-visualstudio.extension
+choco install chocolatey-windowsupdate.extension
+choco install dart-sdk
 
 @REM PROGRAMMING LANGUAGES
 
