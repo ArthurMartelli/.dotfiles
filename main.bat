@@ -133,6 +133,6 @@ gh auth login
 @REM MAKE SYBMBOLIK LINKS FOR FILES
 
 pause
-gh repo clone ArthurMartelli/.dotfiles
+gh repo clone ArthurMartelli/.dotfiles %userprofile%\.dotfiles
 
 py ".dotfiles\setup.py"

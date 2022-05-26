@@ -1,6 +1,6 @@
 import os
 
-HOME = os.getcwd()
+HOME = os.path.expanduser('~')
 dot_path_files = HOME + "\.dotfiles\.files"
 dot_path_dirs = HOME + "\.dotfiles\.dirs"
 
