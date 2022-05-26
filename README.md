@@ -1,3 +1,15 @@
-# Initial commit
+# .dotfile and programs setup
 
-Created repo for automatinc installation of packages
+Automatically setup some programs in your pc
+
+run the following command on an admin powershell:
+
+```powershell
+(wget -URI https://raw.githubusercontent.com/ArthurMartelli/.dotfiles/main/main.bat).Content | cmd
+```
+
+Or from admin cmd:
+
+```cmd
+powershell (wget -URI https://raw.githubusercontent.com/ArthurMartelli/.dotfiles/main/main.bat).Content | cmd
+```
