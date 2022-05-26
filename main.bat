@@ -93,35 +93,35 @@ pip install pdfcli
 
 @REM code --list-extensions
 
-code --install-extension alexcvzz.vscode-sqlite
-code --install-extension batisteo.vscode-django
-code --install-extension chrmarti.regex
-code --install-extension DavidAnson.vscode-markdownlint
-code --install-extension donjayamanne.python-environment-manager
-code --install-extension donjayamanne.python-extension-pack
-code --install-extension eamodio.gitlens
-code --install-extension fnando.linter
-code --install-extension frhtylcn.pythonsnippets
-code --install-extension GitHub.github-vscode-theme
-code --install-extension KevinRose.vsc-python-indent
-code --install-extension marcbruederlin.mint-theme
-code --install-extension marp-team.marp-vscode
-code --install-extension mblode.zotero
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-python.python
-code --install-extension ms-python.vscode-pylance
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension njpwerner.autodocstring
-code --install-extension oderwat.indent-rainbow
-code --install-extension ritwickdey.LiveServer
-code --install-extension sasa.vscode-sass-format
-code --install-extension syler.sass-indented
-code --install-extension tomoki1207.pdf
-code --install-extension Tyriar.lorem-ipsum
-code --install-extension VisualStudioExptTeam.vscodeintellicode
-code --install-extension vscode-icons-team.vscode-icons
-code --install-extension wholroyd.jinja
-code --install-extension yzhang.markdown-all-in-one
+call code --install-extension alexcvzz.vscode-sqlite
+call code --install-extension batisteo.vscode-django
+call code --install-extension chrmarti.regex
+call code --install-extension DavidAnson.vscode-markdownlint
+call code --install-extension donjayamanne.python-environment-manager
+call code --install-extension donjayamanne.python-extension-pack
+call code --install-extension eamodio.gitlens
+call code --install-extension fnando.linter
+call code --install-extension frhtylcn.pythonsnippets
+call code --install-extension GitHub.github-vscode-theme
+call code --install-extension KevinRose.vsc-python-indent
+call code --install-extension marcbruederlin.mint-theme
+call code --install-extension marp-team.marp-vscode
+call code --install-extension mblode.zotero
+call code --install-extension ms-azuretools.vscode-docker
+call code --install-extension ms-python.python
+call code --install-extension ms-python.vscode-pylance
+call code --install-extension ms-vscode-remote.remote-containers
+call code --install-extension njpwerner.autodocstring
+call code --install-extension oderwat.indent-rainbow
+call code --install-extension ritwickdey.LiveServer
+call code --install-extension sasa.vscode-sass-format
+call code --install-extension syler.sass-indented
+call code --install-extension tomoki1207.pdf
+call code --install-extension Tyriar.lorem-ipsum
+call code --install-extension VisualStudioExptTeam.vscodeintellicode
+call code --install-extension vscode-icons-team.vscode-icons
+call code --install-extension wholroyd.jinja
+call code --install-extension yzhang.markdown-all-in-one
 
 @REM CONFIGURE SOME PROGRAMS
 
