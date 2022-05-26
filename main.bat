@@ -65,14 +65,16 @@ choco install tor-browser
 choco install vscode
 choco install steam-client
 choco install epicgameslauncher
+choco install discord
+choco install razer-synapse-3
+choco install spotify
+choco install obs-studio
 choco install gimp
 choco install zotero
 choco install 7zip
 choco install unrar
 choco install microsoft-office-deployment
-choco install spotify
-choco install discord
-choco install obs-studio
+choco install microsoft-teams
 
 pause
 
