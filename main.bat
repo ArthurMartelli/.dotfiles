@@ -1,5 +1,7 @@
 @echo OFF
 
+cd %UserProfile%
+
 NET SESSION >nul 2>&1
 
 IF %ERRORLEVEL% EQU 0 (
@@ -83,6 +85,7 @@ choco install 7zip
 choco install unrar
 choco install microsoft-office-deployment
 choco install microsoft-teams
+choco install virtualbox
 
 pause
 
