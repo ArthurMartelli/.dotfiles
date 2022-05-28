@@ -95,11 +95,13 @@ choco upgrade all
 
 pause
 
-pip install pdfcli
+pip install pdf-cli
 
 @REM VS CODE EXTENSIONS INSTALLATIONS
 
 @REM code --list-extensions
+
+pause
 
 call code --install-extension alexcvzz.vscode-sqlite
 call code --install-extension batisteo.vscode-django
