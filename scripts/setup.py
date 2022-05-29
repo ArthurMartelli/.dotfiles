@@ -1,3 +1,7 @@
+# Creates a symbolic link for files in the ".files" and ".dirs" programs
+
+print('Creating a symbolic link for files in the ".files" and ".dirs" programs')
+
 import os
 
 HOME = os.path.expanduser('~')
