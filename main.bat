@@ -1,19 +1,11 @@
 @echo OFF
 
-NET SESSION >nul 2>&1
-
 IF %ERRORLEVEL% EQU 0 (
-
     echo Beginning Choco installations
-
 ) ELSE (
-
     echo -------------------------------------------------------------
-
     echo ERROR: YOU ARE NOT RUNNING THIS WITH ADMINISTRATOR PRIVILEGES.
-
     echo -------------------------------------------------------------
-
     EXIT /B 1
 
 )
@@ -28,15 +20,13 @@ cd %USERPROFILE%
 CALL refreshenv
 choco install git
 
-call refreshenv
+CALL refreshenv
 git clone https://github.com/ArthurMartelli/.dotfiles %USERPROFILE%\.dotfiles
 
-:: MAKE SYBMBOLIK LINKS FOR FILES
-
-FOR /F %i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\ps1\*.ps1"') DO (
+FOR /F %%i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\ps1\*.ps1"') DO (
     pause
-    powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass %i
-    call refreshenv
+    CALL powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass %%i
+    CALL refreshenv
 )
 
 :: CONFIGURE SOME PROGRAMS
@@ -46,4 +36,6 @@ echo Configuring some programs (login)
 bw login
 gh auth login
 
-call py "%USERPROFILE%\.dotfiles\scripts\setup.py"
+:: MAKE SYBMBOLIK LINKS FOR FILES
+
+CALL py "%USERPROFILE%\.dotfiles\scripts\setup.py"
