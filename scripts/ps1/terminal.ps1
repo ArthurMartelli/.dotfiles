@@ -12,40 +12,44 @@ choco install cascadiamono
 choco install cascadiacodepl
 choco install cascadiamonopl
 
-## Set default profile to newly-updated Powershell
+<#
 
-## Change wt config
-### font:
-#### "face": "CascadiaCode Nerd Font",
-### Opacity: 80
+Set default profile to newly-updated Powershell
 
-## Change code integrated terminal font to a nerd font
+Change Windows Terminal config file
 
-### add "terminal.integrated.fontFamily": "CascadiaCode Nerd Font",
+    font {
+        "face": "CascadiaCode Nerd Font",
+    }
+
+and set 
+    {...
+        Opacity: 80
+    }
+
+Change VSCode integrated terminal font to a nerd font (in JSON config file) by adding:
+
+    "editor.fontFamily": "\"Cascadia Code\", Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "CascadiaCode Nerd Font",
+
+    
+#>
+    
+Write-Output 
 
 # Oh-My-Posh installation
+
+pause
 
 winget install oh-my-posh
 
 $THEME = 'atomicBit'
 
-echo "oh-my-posh init pwsh --config ~\AppData\Local\Programs\oh-my-posh\themes\$THEME.omp.json | Invoke-Expression" > $PROFILE
+# Setup $PROFILE
+
+echo @"
+oh-my-posh init pwsh --config ~\AppData\Local\Programs\oh-my-posh\themes\$THEME.omp.json | Invoke-Expression
+Clear-Host
+"@ > $PROFILE
 
 . $PROFILE
-
-# Terminal icons
-
-Set-Location C:\\
-
-Install-Module -Name Terminal-Icons -Repository PSGallery
-Import-Module -Name Terminal-Icons
-
-Get-Item ./README.md
-
-Get-ChildItem
-
-Get-ChildItem | Format-List
-
-Get-ChildItem | Format-Wide
-
-Set-Location $HOME
