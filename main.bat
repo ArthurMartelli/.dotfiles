@@ -33,8 +33,6 @@ git clone https://github.com/ArthurMartelli/.dotfiles %USERPROFILE%\.dotfiles
 
 :: MAKE SYBMBOLIK LINKS FOR FILES
 
-py "%USERPROFILE%\.dotfiles\scripts\setup.py"
-
 FOR /F %i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\ps1\*.ps1"') DO (
     pause
     powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass %i
@@ -47,3 +45,5 @@ echo Configuring some programs (login)
 
 bw login
 gh auth login
+
+call py "%USERPROFILE%\.dotfiles\scripts\setup.py"
