@@ -43,7 +43,7 @@ pause
 
 winget install oh-my-posh
 
-$THEME = 'atomicBit'
+$THEME = 'nordtron'   # run 'Get-PoshThemes' in powershell to print the themes or look them at https://ohmyposh.dev/docs/themes/
 
 # Setup $PROFILE
 
