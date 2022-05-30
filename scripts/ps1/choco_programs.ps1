@@ -22,6 +22,7 @@ $Programs =
 "docker-desktop",
 "sass",
 "autohotkey.portable",
+"miktex"
 # CLI apps
 "gh",
 "curl",
