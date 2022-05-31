@@ -23,7 +23,9 @@ choco install git
 CALL refreshenv
 git clone https://github.com/ArthurMartelli/.dotfiles %USERPROFILE%\.dotfiles
 
-FOR /F %%i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\ps1\*.ps1"') DO (
+:: Run all scripts in .\scripts\*.ps1
+
+FOR /F %%i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\*.ps1"') DO (
     pause
     CALL powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass %%i
     CALL refreshenv
@@ -31,7 +33,7 @@ FOR /F %%i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\ps1\*.ps1"') DO (
 
 :: CONFIGURE SOME PROGRAMS
 
-echo Configuring some programs (login)
+ECHO Configuring some programs (login)
 
 bw login
 gh auth login
