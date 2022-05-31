@@ -19,12 +19,7 @@ Set default profile to newly-updated Powershell
 Change Windows Terminal config file
 
     font {
-        "face": "CaskaydiaCove Nerd Font",
-    }
-
-and set 
-    {...
-        Opacity: 80
+        "face": "CaskaydiaCove Nerd Font", (or the nerd font of preference)
     }
 
 Change VSCode integrated terminal font to a nerd font (in JSON config file) by adding:
@@ -41,7 +36,9 @@ pause
 
 # Oh-My-Posh installation
 
-winget install oh-my-posh
+choco install oh-my-posh
+
+# select oh-my-posh theme
 
 $THEME = 'nordtron'   # run 'Get-PoshThemes' in powershell to print the themes or look them at https://ohmyposh.dev/docs/themes/
 

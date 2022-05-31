@@ -1,6 +1,6 @@
 # Install chocolatey programs
 
-$Programs =
+$programs =
 # chocolatey
 "chocolatey",
 "chocolatey-compatibility.extension",
@@ -22,7 +22,7 @@ $Programs =
 "docker-desktop",
 "sass",
 "autohotkey.portable",
-"miktex"
+"miktex",
 # CLI apps
 "gh",
 "curl",
@@ -52,6 +52,12 @@ $Programs =
 "microsoft-teams",
 "virtualbox"
 
-foreach ($programItem in $Programs) {
-    choco install $programItem
+$command = "choco install"
+
+$count = 0
+
+foreach ($item in $programs) {
+    $count = $count + 1
+    Write-Output ("[{0} - {1}] Installing {2}" -f $count, $programs.Length, $item)
+    IEX "$command $item"
 }

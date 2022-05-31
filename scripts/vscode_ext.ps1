@@ -1,4 +1,4 @@
-$Programs =
+$programs =
 "alexcvzz.vscode-sqlite",
 "batisteo.vscode-django",
 "chrmarti.regex",
@@ -29,6 +29,10 @@ $Programs =
 "wholroyd.jinja",
 "yzhang.markdown-all-in-one"
 
-foreach ($programItem in $Programs) {
-    code --install-extension $programItem
+$count = 0
+
+foreach ($item in $programs) {
+    $count = $count + 1
+    Write-Output ("[{0} - {1}] Installing {2}" -f $count, $programs.Length, $item)
+    IEX "$command $item"
 }
