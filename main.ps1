@@ -41,4 +41,4 @@ Invoke-Expression gh auth login
 
 Write-Output "Creating Symbolic Link"
 
-Invoke-Expression 'py "$HOME\.dotfiles\scripts\setup.py"'
+Invoke-Expression "py $HOME\.dotfiles\scripts\setup.py"
