@@ -1,3 +1,5 @@
+# Install VSCode extensions
+
 $programs =
 "alexcvzz.vscode-sqlite",
 "batisteo.vscode-django",
@@ -28,6 +30,8 @@ $programs =
 "vscode-icons-team.vscode-icons",
 "wholroyd.jinja",
 "yzhang.markdown-all-in-one"
+
+$command = "code --install-extension"
 
 $count = 0
 
