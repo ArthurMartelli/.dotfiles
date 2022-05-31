@@ -1,3 +1,5 @@
+# Updates powershell, install oh my posh and selects a theme
+
 # Update powershell
 
 Invoke-Expression "& { $(Invoke-RestMethod 'https://aka.ms/install-powershell.ps1' ) } -UseMSI -Preview"
