@@ -26,10 +26,9 @@ git clone https://github.com/ArthurMartelli/.dotfiles %USERPROFILE%\.dotfiles
 :: Run all scripts in .\scripts\*.ps1
 
 FOR /F %%i IN ('dir /b /s "%USERPROFILE%\.dotfiles\scripts\*.ps1"') DO (
-    echo %%i
-    @REM pause
-    @REM CALL powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass %%i
-    @REM CALL refreshenv
+    pause
+    CALL powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass %%i
+    CALL refreshenv
 )
 
 :: CONFIGURE SOME PROGRAMS
