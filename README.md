@@ -7,3 +7,5 @@ run the following command on an admin powershell:
 ```powershell
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ArthurMartelli/.dotfiles/main/main.ps1'))"
 ```
+
+((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ArthurMartelli/.dotfiles/main/main.ps1'))
