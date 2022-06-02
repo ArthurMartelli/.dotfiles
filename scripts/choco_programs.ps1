@@ -23,6 +23,7 @@ $programs =
 "sass",
 "autohotkey.portable",
 "miktex",
+"gitkraken",
 # CLI apps
 "gh",
 "curl",
@@ -59,5 +60,5 @@ $count = 0
 foreach ($item in $programs) {
     $count = $count + 1
     Write-Output ("[{0} - {1}] Installing {2}" -f $count, $programs.Length, $item)
-    IEX "$command $item"
+    Invoke-Expression "$command $item"
 }
