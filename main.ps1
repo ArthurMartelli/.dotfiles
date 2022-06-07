@@ -24,7 +24,7 @@ git clone "https://github.com/ArthurMartelli/.dotfiles" $HOME\.dotfiles
 
 # Run all scripts in .\scripts\*.ps1
 
-Get-ChildItem –Path "$HOME\.dotfiles\scripts\*.ps1" | Foreach-Object {
+Get-ChildItem -Path "$HOME\.dotfiles\scripts\*.ps1" | Foreach-Object {
     pause "Press any key to continue"
     Write-Output $_.FullName
     Invoke-Expression refreshenv
@@ -35,12 +35,8 @@ Get-ChildItem –Path "$HOME\.dotfiles\scripts\*.ps1" | Foreach-Object {
 Write-Output "Login into some programs"
 
 Invoke-Expression bw login
-Invoke-Expression gh auth login
 
 # Make sybmbolik links for files
 
 Write-Output "Creating Symbolic Link"
 
-Invoke-Expression @"
-    py $HOME\.dotfiles\scripts\setup.py
-"@

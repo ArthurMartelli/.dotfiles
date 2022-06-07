@@ -36,9 +36,10 @@ Write-Output "Configure VScode and Windows Terminal"
 
 pause
 
-# Oh-My-Posh installation
+# Oh-My-Posh and terminal icons installation
 
 choco install oh-my-posh
+Install-Module -Name Terminal-Icons -Repository PSGallery
 
 # select oh-my-posh theme
 
@@ -48,6 +49,7 @@ $THEME = 'nordtron'   # run 'Get-PoshThemes' in powershell to print the themes o
 
 Write-Output @"
 oh-my-posh init pwsh --config ~\AppData\Local\Programs\oh-my-posh\themes\$THEME.omp.json | Invoke-Expression
+Import-Module -Name Terminal-Icons
 Clear-Host
 "@ > $PROFILE
 
