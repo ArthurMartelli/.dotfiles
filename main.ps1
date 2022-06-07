@@ -43,4 +43,4 @@ Write-Output "Creating Symbolic Link"
 
 Invoke-Expression @"
     py $HOME\.dotfiles\scripts\setup.py
-"@"
+"@
