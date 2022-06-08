@@ -1,8 +1,10 @@
+Write-Host Seting up your ssh connection to GitHhub and the GitHub CLI
+
 $email = Read-Host "Enter your email"
 
 ssh-keygen -t ed25519 -C $email
 
-$ssh_private_path = Read-Host "Enter the ssh path file"
+$ssh_private_path = Read-Host "Enter the ssh private path file"
 $ssh_public_path = "$ssh_private_path.pub"
 $computer_name = Read-Host "Enter the ssh key name (computer name)"
 
