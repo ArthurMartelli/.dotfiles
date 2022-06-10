@@ -1,6 +1,10 @@
+#Requires -RunAsAdministrator
+
+Write-Host "Installing programs with Chocolatey"
+
 # Install chocolatey programs
 
-$programs =
+$choco_programs =
 # chocolatey
 "chocolatey",
 "chocolatey-compatibility.extension",
@@ -33,7 +37,6 @@ $programs =
 "marp-cli",
 "grep",
 # Applications
-"microsoft-windows-terminal",
 "googlechrome",
 "opera-gx",
 "tor-browser",
@@ -53,12 +56,30 @@ $programs =
 "microsoft-teams",
 "virtualbox"
 
-$command = "choco install"
+$choco_command = "choco install"
 
 $count = 0
 
-foreach ($item in $programs) {
+foreach ($item in $choco_programs) {
     $count = $count + 1
-    Write-Output ("[{0} - {1}] Installing {2}" -f $count, $programs.Length, $item)
-    Invoke-Expression "$command $item"
+    Write-Output ("[{0} - {1}] Installing {2}" -f $count, $choco_programs.Length, $item)
+    Invoke-Expression "$choco_command $item"
+}
+
+# Install chocolatey programs
+
+Write-Host "Installing programs with Winget"
+
+$winget_programs =
+"Blitz.Blitz",
+"Microsoft.WindowsTerminal"
+
+$winget_command = "choco install"
+
+$count = 0
+
+foreach ($item in $winget_programs) {
+    $count = $count + 1
+    Write-Output ("[{0} - {1}] Installing {2}" -f $count, $winget_programs.Length, $item)
+    Invoke-Expression "$winget_command $item"
 }

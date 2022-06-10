@@ -1,4 +1,8 @@
+#Requires -RunAsAdministrator
+
 Write-Host Seting up your ssh connection to GitHhub and the GitHub CLI
+
+# Set up the ssh connection and the github CLI account
 
 $email = Read-Host "Enter your email"
 

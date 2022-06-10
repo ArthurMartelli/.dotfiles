@@ -1,3 +1,7 @@
+#Requires -RunAsAdministrator
+
+Write-Host "Installing VSCode extensions"
+
 # Install VSCode extensions
 
 $programs =

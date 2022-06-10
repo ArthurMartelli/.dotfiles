@@ -1,3 +1,7 @@
+#Requires -RunAsAdministrator
+
+Write-Host "Setting up the terminal"
+
 # Updates powershell, install oh my posh and selects a theme
 
 # Update powershell

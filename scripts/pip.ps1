@@ -1,4 +1,8 @@
+#Requires -RunAsAdministrator
+
 # Install pip packages
+
+Write-Host "Installing pip packages"
 
 $programs =
 "black",
