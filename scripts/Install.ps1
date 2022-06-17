@@ -79,8 +79,10 @@ $winget = @{
     comand = "winget install"
     programs = @(
         "Blitz.Blitz",
-        "Microsoft.WindowsTerminal"
-)}
+        "Microsoft.WindowsTerminal",
+        "Microsoft.PowerShell"
+    )
+}
 
 
 $pip = @{
