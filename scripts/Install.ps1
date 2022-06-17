@@ -20,7 +20,7 @@ function Install {
 }
 
 $choco = @{ 
-    command =  "choco install"
+    command  = "choco install"
     programs = @(
         # chocolatey
         "chocolatey",
@@ -76,17 +76,18 @@ $choco = @{
 }
 
 $winget = @{
-    comand = "winget install"
+    comand   = "winget install"
     programs = @(
         "Blitz.Blitz",
         "Microsoft.WindowsTerminal",
-        "Microsoft.PowerShell"
+        "Microsoft.PowerShell",
+        "9PH29FZMQK7T"  # Shiori for Genshin
     )
 }
 
 
 $pip = @{
-    command = "pip install"
+    command  = "pip install"
     programs = @(
         "black",
         "pdf-cli",
@@ -97,7 +98,7 @@ $pip = @{
 }
 
 $vscode = @{
-    command = "code --install-extension"
+    command  = "code --install-extension"
     programs = @(
         "alexcvzz.vscode-sqlite", 
         "bat-snippets.bat-snippets", 
