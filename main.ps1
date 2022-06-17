@@ -32,7 +32,7 @@ Get-ChildItem -Path "$HOME\.dotfiles\scripts\*.ps1" | Foreach-Object {
 
 # Configure some programs
 
-Write-Output "Login into some programs"
+Write-Output "Login into bitwarden"
 
 Invoke-Expression bw login
 
