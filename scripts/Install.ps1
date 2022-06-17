@@ -1,4 +1,4 @@
-# -RunAsAdministrator
+#Requires -RunAsAdministrator
 
 function Install {
     param (

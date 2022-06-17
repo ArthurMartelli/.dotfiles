@@ -2,12 +2,6 @@
 
 Write-Host "Setting up the terminal"
 
-# Updates powershell, install oh my posh and selects a theme
-
-# Update powershell
-
-Invoke-Expression "& { $(Invoke-RestMethod 'https://aka.ms/install-powershell.ps1' ) } -UseMSI -Preview"
-
 # Configure Windows Terminal
 
 ## Font installation
@@ -20,7 +14,7 @@ choco install cascadiamonopl
 
 <#
 
-Set default profile to newly-updated Powershell
+Set default profile to Powershell
 
 Change Windows Terminal config file
 
@@ -33,9 +27,9 @@ Change VSCode integrated terminal font to a nerd font (in JSON config file) by a
     "editor.fontFamily": "\"Cascadia Code\", Consolas, 'Courier New', monospace",
     "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Fonts",
 
-    
+
 #>
-    
+
 Write-Output "Configure VScode and Windows Terminal"
 
 pause
