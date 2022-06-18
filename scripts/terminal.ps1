@@ -46,7 +46,7 @@ $THEME = 'nordtron'   # run 'Get-PoshThemes' in powershell to print the themes o
 # Setup $PROFILE
 
 Write-Output @"
-oh-my-posh init pwsh --config ~\AppData\Local\Programs\oh-my-posh\themes\$THEME.omp.json | Invoke-Expression
+oh-my-posh init pwsh --config "C:\Program Files (x86)\oh-my-posh\themes\$THEME.omp.json" | Invoke-Expression
 Import-Module -Name Terminal-Icons
 Clear-Host
 "@ > $PROFILE
