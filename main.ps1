@@ -6,7 +6,7 @@ Set-Location $HOME
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-choco feature enable -n = allowGlobalConfirmation
+Invoke-Expression choco feature enable -n = allowGlobalConfirmation
 
 Write-Output Chocolatey is ready to begin installing packages!
 
@@ -30,13 +30,14 @@ Get-ChildItem -Path "$HOME\.dotfiles\scripts\*.ps1" | Foreach-Object {
     Invoke-Expression refreshenv
 }
 
-# Configure some programs
-
-Write-Output "Login into bitwarden"
-
-Invoke-Expression bw login
-
 # Make sybmbolik links for files
 
 Write-Output "Creating Symbolic Link"
 
+Invoke-Expression "Python scripts/setup.py"
+
+# Configure some password manager
+
+Write-Output "Login into bitwarden"
+
+Invoke-Expression bw login

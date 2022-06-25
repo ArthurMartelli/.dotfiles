@@ -1,18 +1,15 @@
 # Creates a symbolic link for files in the ".files" and ".dirs" programs
 
 import ctypes
+import os
+import sys
 
-admin = (
-    ctypes.windll.shell32.IsUserAnAdmin()
-)  # checks if the script is running as admin
-
-if not admin:
-    print("This script requires to run as administrator")
-    exit()
+# checks if the script is running as admin, exits if not
+if not ctypes.windll.shell32.IsUserAnAdmin():
+    sys.exit("This script requires to run as administrator")
 
 print('Creating a symbolic link for files in the ".files" and ".dirs" programs')
 
-import os
 
 HOME = os.path.expanduser("~")
 dot_path_files = HOME + "\.dotfiles\.files"
@@ -21,19 +18,42 @@ dot_path_dirs = HOME + "\.dotfiles\.dirs"
 dot_files = os.listdir(dot_path_files)
 dot_dirs = os.listdir(dot_path_dirs)
 
-for file in dot_files:
-    og_path = dot_path_files + "\\" + file
-    link_path = HOME + "\\" + file
 
-    command = f"mklink {link_path} {og_path}"
-    print(command)
-    os.system(command)
+def files_symlink() -> None:
+    """Creates a symlink in ~ for all files in .files dir
+    """
+    for file in dot_files:
+        src = dot_path_files + "\\" + file
+        dst = HOME + "\\" + file
+
+        try:
+            os.symlink(src, dst)
+        except FileExistsError:
+            print(f"[SKIPPED] {src} -> {dst}")
+            continue
+
+        print(f"{src} -> {dst}")
 
 
-for directory in dot_dirs:
-    og_path = dot_path_dirs + "\\" + directory
-    link_path = HOME + "\\" + directory
+def dirs_symlink() -> None:
+    """Creates a symlink in ~ for all directories in .dirs dir
+    """
+    for diry in dot_dirs:
+        src = dot_path_dirs + "\\" + diry
+        dst = HOME + "\\" + diry
 
-    command = f"mklink /d {link_path} {og_path}"
-    print(command)
-    os.system(command)
+        print(f"{src} -> {dst}")
+
+        try:
+            os.symlink(src, dst, True)
+        except FileExistsError:
+            continue
+
+
+def main():
+    files_symlink()
+    dirs_symlink()
+
+
+if __name__ == "__main__":
+    main()

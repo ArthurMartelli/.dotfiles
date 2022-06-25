@@ -93,7 +93,15 @@ $pip = @{
         "pdf-cli",
         "numpy",
         "pandas",
-        "Django"
+        "Django",
+        "autopep8"
+    )
+}
+
+$npm = @{
+    command  = "npm install -g"
+    programs = @(
+        "touch-cli"
     )
 }
 
@@ -144,6 +152,9 @@ Install $winget
 
 Write-Host "Installing pip packages"
 Install $pip
+
+Write-Host "Installing global npm packages"
+Install $npm
 
 Write-Host "Installing VSCode extensions"
 Install $vscode
