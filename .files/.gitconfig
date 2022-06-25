@@ -1,5 +1,5 @@
 [core]
-	editor = \"C:\\Users\\Arthur\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
+	editor = \"~\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code\" --wait
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process

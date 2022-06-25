@@ -1,4 +1,4 @@
-# .dotfile and programs setup
+# Set up the dotfiles and install programs
 
 Automatically setup some programs in your pc
 

@@ -20,7 +20,7 @@ dot_dirs = os.listdir(dot_path_dirs)
 
 
 def files_symlink() -> None:
-    """Creates a symlink in ~ for all files in .files dir
+    """Creates a symlink in the home directory for all files in .files dir
     """
     for file in dot_files:
         src = dot_path_files + "\\" + file
@@ -29,14 +29,14 @@ def files_symlink() -> None:
         try:
             os.symlink(src, dst)
         except FileExistsError:
-            print(f"[SKIPPED] {src} -> {dst}")
+            print(f"[SKIPPED {file}] {src} -> {dst}")
             continue
 
-        print(f"{src} -> {dst}")
+        print(f"[CREATED {file}] {src} -> {dst}")
 
 
 def dirs_symlink() -> None:
-    """Creates a symlink in ~ for all directories in .dirs dir
+    """Creates a symlink in the home directory for all directories in .dirs dir
     """
     for diry in dot_dirs:
         src = dot_path_dirs + "\\" + diry

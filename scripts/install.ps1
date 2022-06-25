@@ -1,9 +1,10 @@
 #Requires -RunAsAdministrator
 
-function Install {
+function install {
     param (
         $packages
     )
+    Write-Output packages.message
 
     $command = $packages.command
 
@@ -15,11 +16,12 @@ function Install {
         $percent = ($count / $total).tostring("P")
 
         Write-Output ("($percent) [$count - $total] Installing $item")
-        Write-Output "${command} ${item}"
+        Invoke-Expression "${command} ${item}"
     }
 }
 
-$choco = @{ 
+$choco = @{
+    message  = "Installing programs with Chocolatey"
     command  = "choco install"
     programs = @(
         # chocolatey
@@ -76,6 +78,7 @@ $choco = @{
 }
 
 $winget = @{
+    message  = "Installing programs with Winget"
     comand   = "winget install"
     programs = @(
         "Blitz.Blitz",
@@ -87,6 +90,7 @@ $winget = @{
 
 
 $pip = @{
+    message  = "Installing pip packages"
     command  = "pip install"
     programs = @(
         "black",
@@ -99,6 +103,7 @@ $pip = @{
 }
 
 $npm = @{
+    message  = "Installing global npm packages"
     command  = "npm install -g"
     programs = @(
         "touch-cli"
@@ -106,6 +111,7 @@ $npm = @{
 }
 
 $vscode = @{
+    message  = "Installing VSCode extensions"
     command  = "code --install-extension"
     programs = @(
         "alexcvzz.vscode-sqlite", 
@@ -144,17 +150,12 @@ $vscode = @{
     )
 }
 
-Write-Host "Installing programs with Chocolatey"
-Install $choco
+function Main {
+    install $choco
+    install $winget
+    install $pip
+    install $npm
+    install $vscode
+}
 
-Write-Host "Installing programs with Winget"
-Install $winget
-
-Write-Host "Installing pip packages"
-Install $pip
-
-Write-Host "Installing global npm packages"
-Install $npm
-
-Write-Host "Installing VSCode extensions"
-Install $vscode
+Main

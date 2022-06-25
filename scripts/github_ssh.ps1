@@ -8,23 +8,18 @@ $email = Read-Host "Enter your email"
 
 ssh-keygen -t ed25519 -C $email
 
-$ssh_private_path = Read-Host "Enter the ssh private path file"
+$ssh_private_path = "$HOME\.ssh\id_ed25519"
 $ssh_public_path = "$ssh_private_path.pub"
 $computer_name = Read-Host "Enter the ssh key name (computer name)"
 
-try {
-    Invoke-Expression ssh-add $ssh_private_path
-}
-catch {
-    Set-Service -Name ssh-agent -StartupType Manual
-    Start-Service ssh-agent
-    Invoke-Expression ssh-add $ssh_private_path
-}
+Set-Service -Name ssh-agent -StartupType Manual
+Start-Service ssh-agent
+Invoke-Expression ssh-add $ssh_private_path
 
 Write-Host "Loggin into GitHub"
 
-Invoke-Expression gh auth login
+Invoke-Expression "gh auth login"
 
 Write-Host "Adding ssh key"
 
-Invoke-Expression gh ssh-key add $ssh_public_path --title $computer_name
+Invoke-Expression "gh ssh-key add $ssh_public_path --title $computer_name"
