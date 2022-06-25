@@ -1,0 +1,25 @@
+{
+    "workbench.colorTheme": "Mint (Dark)",
+    "markdown.extension.toc.levels": "1..2",
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.autofetch": true,
+    "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)",
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "bracketPairColorizer.depreciation-notice": false,
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.presets.tsOfficial": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "markdownlint.config": {
+        "MD025": false,
+        "MD033": false,
+        "MD034": false,
+        "MD041": false
+    },
+    "editor.formatOnSave": true,
+    "git.enableSmartCommit": true,
+    "editor.fontFamily": "\"Cascadia Code\", Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font",
+    "diffEditor.ignoreTrimWhitespace": false
+}
