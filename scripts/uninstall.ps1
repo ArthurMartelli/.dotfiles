@@ -24,18 +24,18 @@ $windows_packages = @{
     message  = "Uninstalling some default apps"
     command  = "Remove-AppPackage"
     programs = @(
-        "Microsoft.GamingApp_8wekyb3d8bbwe",
-        "Microsoft.XboxIdentityProvider_8wekyb3d8bbwe",
-        "Microsoft.XboxSpeechToTextOverlay_8wekyb3d8bbwe",
-        "Microsoft.XboxGameOverlay_8wekyb3d8bbwe",
-        "Microsoft.Xbox.TCUI_8wekyb3d8bbwe",
-        "Microsoft.549981C3F5F10_8wekyb3d8bbwe",
-        "Microsoft.BingNews_8wekyb3d8bbwe",
-        "Microsoft.GetHelp_8wekyb3d8bbwe",
-        "Microsoft.Getstarted_8wekyb3d8bbwe",
-        "Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe",
-        "Microsoft.WindowsFeedbackHub_8wekyb3d8bbwe",
-        "Microsoft.ZuneMusic_8wekyb3d8bbwe"
+        "   ",
+        "Microsoft.XboxIdentityProvider",
+        "Microsoft.XboxSpeechToTextOverlay",
+        "Microsoft.XboxGameOverlay",
+        "Microsoft.Xbox.TCUI",
+        "Microsoft.549981C3F5F10",
+        "Microsoft.BingNews",
+        "Microsoft.GetHelp",
+        "Microsoft.Getstarted",
+        "Microsoft.MicrosoftSolitaireCollection",
+        "Microsoft.WindowsFeedbackHub",
+        "Microsoft.ZuneMusic"
     )
 }
 
