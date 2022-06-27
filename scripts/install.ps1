@@ -7,18 +7,54 @@ function install {
     Write-Output packages.message
 
     $command = $packages.command
-
     $count = 0
     $total = $packages.programs.Length
     
+    $title = 'something'
+    $question = 'Are you sure you want to proceed?'
+    $choices = @(
+        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Clear the BrowserCache")
+        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Clear the BrowserCache")
+        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Clear the TempFolder")
+        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Clear the TempFolder")
+    )
+
+    $g_confirm = 0
+
     foreach ($item in $packages.programs) {
+
         $count += 1
         $percent = ($count / $total).tostring("P")
+        
+        if ($g_confirm -eq 1) {
+            Write-Output ("($percent) [$count - $total] Installing $item")
+            # Invoke-Expression "${command} ${item}"
+            continue
+        }
 
-        Write-Output ("($percent) [$count - $total] Installing $item")
-        Invoke-Expression "${command} ${item}"
+        $decision = $Host.UI.PromptForChoice($title, $question, $choices, 2)
+            
+        switch ($decision) {
+            0 {
+                Write-Output ("($percent) [$count - $total] Installing $item")
+                # Invoke-Expression "${command} ${item}" 
+            }
+            1 {
+                $g_confirm = 1
+                Write-Output ("($percent) [$count - $total] Installing $item")
+                # Invoke-Expression "${command} ${item}"
+            }
+            2 {
+                Write-Output ("($percent) [$count - $total] Skipping $item")
+            }
+            3 {
+                Write-Output ("Skipping all further installations")
+                break
+            }
+        }
     }
 }
+
 
 $choco = @{
     message  = "Installing programs with Chocolatey"
