@@ -8,48 +8,99 @@ function setupPC {
     # Being able to run scripts
     Set-ExecutionPolicy "RemoteSigned"
 
-    $theme_reg_path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
-    $explorer_reg_path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-    $search_reg_path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search"
+    $reg_settings = @(
+        @{
+            path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+            keys = @(
+                @{
+                    name    = "AppsUseLightTheme"
+                    value   = 1
+                    comment = "Enabled Dark Mode"
+                }
+            )
+        },
+        @{
+            path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+            keys = @(
+                @{
+                    name    = "TaskbarAl"
+                    value   = 0
+                    comment = "Align taskbar to the left"
+                },
+                @{
+                    name    = "HideFileExt"
+                    value   = 0
+                    comment = "Show file extensions"
+                },
+                @{
+                    name    = "Hidden"
+                    value   = 1
+                    comment = "Show hidden files"
+                },
+                @{
+                    name    = "LaunchTo"
+                    value   = 1
+                    comment = "Launch File explorer on quick access (0) or This PC (1) [Set to 1]"
+                },
+                @{
+                    name    = "IconsOnly"
+                    value   = 1
+                    comment = "Only show icons, not thumbnails"
+                },
+                @{
+                    name    = "DontPrettyPath"
+                    value   = 1 
+                    comment = "Prevent case change on filename"
+                },
+                @{
+                    name    = "TaskbarGlomLevel"
+                    value   = 1
+                    comment = "Always combine items in taskbar"
+                },
+                @{
+                    name    = "Start_TrackDocs"
+                    value   = 0
+                    comment = "Dont track docs on start menu"
+                },
+                @{
+                    name    = "ShowTaskViewButton"
+                    value   = 0
+                    comment = "Hide the task view button on the taskbar"
+                },
+                @{
+                    name    = "TaskbarDa"
+                    value   = 0
+                    comment = "Hide the widgets button on the taskbar"
+                },
+                @{
+                    name    = "TaskbarMn"
+                    value   = 0
+                    comment = "Hide the chat button on the taskbar"
+                }
+            
+            )
+        },
+        @{
+            path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search"
+            keys = @(
+                @{
+                    name    = "SearchboxTaskbarMode"
+                    value   = 0
+                    comment = "Hide search button on the taskbar"
+                }
+            )
+        }
+    )
 
-    # Enable Dark Mode
-    Set-ItemProperty -Path $theme_reg_path  -Name "AppsUseLightTheme" -Value 0 -Type Dword -Force
+    foreach ($item in $reg_settings) {
+        $path = $item.path
+        $keys = $item.keys
 
-    # Align taskbar to the left
-    Set-ItemProperty -Path $explorer_reg_path -Name "TaskbarAl" -Value 0 -Type Dword -Force
-    
-    # Show file extensions
-    Set-ItemProperty -Path $explorer_reg_path -Name "HideFileExt" -Value 0 -Type Dword -Force
-    
-    # Show hidden files
-    Set-ItemProperty -Path $explorer_reg_path -Name "Hidden" -Value 1 -Type Dword -Force
-    
-    # Launch File explorer on quick access (0) or This PC (1)
-    Set-ItemProperty -Path $explorer_reg_path -Name "LaunchTo" -Value 1 -Type Dword -Force
-
-    # Only show icons, not thumbnails
-    Set-ItemProperty -Path $explorer_reg_path -Name "IconsOnly" -Value 1 -Type Dword -Force
-    
-    # Prevent case change on filename
-    Set-ItemProperty -Path $explorer_reg_path -Name "DontPrettyPath" -Value 1 -Type Dword -Force
-
-    # Always combine items in taskbar
-    Set-ItemProperty -Path $explorer_reg_path -Name "TaskbarGlomLevel" -Value 1 -Type Dword -Force
-
-    # Dont track docs on start menu
-    Set-ItemProperty -Path $explorer_reg_path -Name "Start_TrackDocs" -Value 0 -Type Dword -Force
-    
-    # Hide the task view button on the taskbar
-    Set-ItemProperty -Path $explorer_reg_path -Name "ShowTaskViewButton" -Value 0 -Type Dword -Force
-    
-    # Hide the widgets button on the taskbar
-    Set-ItemProperty -Path $explorer_reg_path -Name "TaskbarDa" -Value 0 -Type Dword -Force
-    
-    # Hide the chat button on the taskbar
-    Set-ItemProperty -Path $explorer_reg_path -Name "TaskbarMn" -Value 0 -Type Dword -Force
-
-    # Hide search button on the taskbar
-    Set-ItemProperty -Path $search_reg_path -Name "SearchboxTaskbarMode" -Value 0 -Type Dword -Force
+        foreach ($key in $keys) {
+            Write-Output $key.comment
+            Set-ItemProperty -Path $path -Name $key.name -Value $key.value -Type Dword -Force
+        }
+    }
 }
 
 function installWinGet {
