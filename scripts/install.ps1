@@ -1,22 +1,21 @@
 #Requires -RunAsAdministrator
 
 function install {
+
     param (
         $packages
     )
-    Write-Output packages.message
+    Write-Output $packages.message
 
     $command = $packages.command
     $count = 0
     $total = $packages.programs.Length
-    
-    $title = 'something'
-    $question = 'Are you sure you want to proceed?'
-    $choices = @(
-        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Clear the BrowserCache")
-        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Clear the BrowserCache")
-        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Clear the TempFolder")
-        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Clear the TempFolder")
+
+    $q_choices = @(
+        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Install this program")
+        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Install this and all further programs")
+        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Don't install this program")
+        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Don't install this or any further program")
     )
 
     $g_confirm = 0
@@ -28,28 +27,30 @@ function install {
         
         if ($g_confirm -eq 1) {
             Write-Output ("($percent) [$count - $total] Installing $item")
-            # Invoke-Expression "${command} ${item}"
+            Invoke-Expression "${command} ${item}"
             continue
         }
-
-        $decision = $Host.UI.PromptForChoice($title, $question, $choices, 2)
+        
+        $q_title = "Installation of $item"
+        $q_question = "Do you want to proceed?"
+        $decision = $Host.UI.PromptForChoice($q_title, $q_question, $q_choices, 2)
             
         switch ($decision) {
             0 {
                 Write-Output ("($percent) [$count - $total] Installing $item")
-                # Invoke-Expression "${command} ${item}" 
+                Invoke-Expression "${command} ${item}" 
             }
             1 {
                 $g_confirm = 1
                 Write-Output ("($percent) [$count - $total] Installing $item")
-                # Invoke-Expression "${command} ${item}"
+                Invoke-Expression "${command} ${item}"
             }
             2 {
                 Write-Output ("($percent) [$count - $total] Skipping $item")
             }
             3 {
                 Write-Output ("Skipping all further installations")
-                break
+                return
             }
         }
     }
