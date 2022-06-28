@@ -14,7 +14,7 @@ function setupPC {
             keys = @(
                 @{
                     name    = "AppsUseLightTheme"
-                    value   = 1
+                    value   = 0
                     comment = "Enabled Dark Mode"
                 }
             )

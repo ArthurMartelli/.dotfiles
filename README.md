@@ -5,5 +5,5 @@ Automatically setup some programs in your pc
 run the following command in an admin powershell:
 
 ```powershell
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ArthurMartelli/.dotfiles/main/main.ps1'))"
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ArthurMartelli/.dotfiles/main/main.ps1'))
 ```
