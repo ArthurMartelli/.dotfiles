@@ -1,61 +1,5 @@
 #Requires -RunAsAdministrator
 
-function install {
-    param (
-        $packages
-    )
-    Write-Output packages.message
-
-    $command = $packages.command
-    $count = 0
-    $total = $packages.programs.Length
-    
-    $title = 'something'
-    $question = 'Are you sure you want to proceed?'
-    $choices = @(
-        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Clear the BrowserCache")
-        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Clear the BrowserCache")
-        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Clear the TempFolder")
-        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Clear the TempFolder")
-    )
-
-    $g_confirm = 0
-
-    foreach ($item in $packages.programs) {
-
-        $count += 1
-        $percent = ($count / $total).tostring("P")
-        
-        if ($g_confirm -eq 1) {
-            Write-Output ("($percent) [$count - $total] Installing $item")
-            # Invoke-Expression "${command} ${item}"
-            continue
-        }
-
-        $decision = $Host.UI.PromptForChoice($title, $question, $choices, 2)
-            
-        switch ($decision) {
-            0 {
-                Write-Output ("($percent) [$count - $total] Installing $item")
-                # Invoke-Expression "${command} ${item}" 
-            }
-            1 {
-                $g_confirm = 1
-                Write-Output ("($percent) [$count - $total] Installing $item")
-                # Invoke-Expression "${command} ${item}"
-            }
-            2 {
-                Write-Output ("($percent) [$count - $total] Skipping $item")
-            }
-            3 {
-                Write-Output ("Skipping all further installations")
-                break
-            }
-        }
-    }
-}
-
-
 $choco = @{
     message  = "Installing programs with Chocolatey"
     command  = "choco install"
@@ -91,6 +35,7 @@ $choco = @{
         "bitwarden-cli",
         "marp-cli",
         "grep",
+        "sudo"
         # Applications
         "googlechrome",
         "opera-gx",
@@ -184,6 +129,62 @@ $vscode = @{
         "wholroyd.jinja", 
         "yzhang.markdown-all-in-one"
     )
+}
+
+function install {
+
+    param (
+        $packages
+    )
+    Write-Output $packages.message
+
+    $command = $packages.command
+    $count = 0
+    $total = $packages.programs.Length
+
+    $q_choices = @(
+        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Install this program")
+        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Install this and all further programs")
+        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Don't install this program")
+        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Don't install this or any further program")
+    )
+
+    $g_confirm = 0
+
+    foreach ($item in $packages.programs) {
+
+        $count += 1
+        $percent = ($count / $total).tostring("P")
+        
+        if ($g_confirm -eq 1) {
+            Write-Output ("($percent) [$count - $total] Installing $item")
+            Invoke-Expression "${command} ${item}"
+            continue
+        }
+        
+        $q_title = "Installation of $item"
+        $q_question = "Do you want to proceed?"
+        $decision = $Host.UI.PromptForChoice($q_title, $q_question, $q_choices, 2)
+            
+        switch ($decision) {
+            0 {
+                Write-Output ("($percent) [$count - $total] Installing $item")
+                Invoke-Expression "${command} ${item}" 
+            }
+            1 {
+                $g_confirm = 1
+                Write-Output ("($percent) [$count - $total] Installing $item")
+                Invoke-Expression "${command} ${item}"
+            }
+            2 {
+                Write-Output ("($percent) [$count - $total] Skipping $item")
+            }
+            3 {
+                Write-Output ("Skipping all further installations")
+                return
+            }
+        }
+    }
 }
 
 function Main {
