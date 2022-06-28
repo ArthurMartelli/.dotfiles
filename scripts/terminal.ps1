@@ -34,16 +34,23 @@ function installRequirements {
 }
 
 function setupTerminals {
-    $terminals = @{
-        name = "wt"
-        path = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-        src  = "$HOME\.wtconfig"
-    },
-    @{
-        name = "vscode"
-        path = "$HOME\AppData\Roaming\Code\User\settings.json"
-        src  = "$HOME\.vscodeconfig"
-    }
+    $terminals = @(
+        @{
+            name = "wt"
+            path = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+            src  = "$HOME\.wtconfig"
+        },
+        @{
+            name = "vscode"
+            path = "$HOME\AppData\Roaming\Code\User\settings.json"
+            src  = "$HOME\.vscodeconfig"
+        },
+        @{
+            name = "profile"
+            path = $PROFILE
+            src  = "$HOME\.profile"
+        }
+    )
 
     foreach ($terminal in $terminals) {
         New-Item -ItemType SymbolicLink -Path $terminal.path -Target $terminal.src -Force
@@ -66,7 +73,6 @@ function setupProfile {
 function Main {
     installRequirements
     setupTerminals
-    setupProfile
 }
 
 Main
