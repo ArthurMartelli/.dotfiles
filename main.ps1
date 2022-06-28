@@ -4,10 +4,7 @@ Set-Location $HOME
 
 function setupPC {
     # Basic configuration for windows
-
-    # Being able to run scripts
-    Set-ExecutionPolicy "RemoteSigned"
-
+    
     $reg_settings = @(
         @{
             path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
@@ -101,6 +98,10 @@ function setupPC {
             Set-ItemProperty -Path $path -Name $key.name -Value $key.value -Type Dword -Force
         }
     }
+
+    # Unpin all items from the taskbar
+    Remove-Item "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*"
+
 }
 
 function installWinGet {
