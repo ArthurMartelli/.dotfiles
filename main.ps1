@@ -164,6 +164,15 @@ function setupPrograms {
     Update-SessionEnvironment
 }
 
+function hideDotfiles {
+    # Hides all dotfiles in the home dir
+    $dotfiles = Get-Item "$HOME\.*" -Force
+
+    foreach ($path in $dotfiles) {
+        $path.Attributes += 'Hidden'
+    }
+}
+
 function Main {
     setupPC
     installWinGet
