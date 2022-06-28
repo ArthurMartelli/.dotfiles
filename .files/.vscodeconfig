@@ -18,4 +18,7 @@
     "git.enableSmartCommit": true,
     "editor.formatOnSave": true,
     "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)",
+    "[json]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
 }
