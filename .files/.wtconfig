@@ -39,7 +39,7 @@
         {
             "font": 
             {
-                "face": "'CaskaydiaCove Nerd Font', 'Cascadia Code PL'"
+                "face": "CaskaydiaCove Nerd Font"
             },
             "opacity": 80
         },
