@@ -1,21 +1,24 @@
 {
-    "workbench.colorTheme": "Mint (Dark)",
-    "workbench.iconTheme": "vscode-icons",
-    "editor.fontFamily": "'Cascadia Code PL', 'CaskaydiaCove Nerd Font'",
-    "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font, 'Cascadia Code PL'",
-    "vsicons.presets.tsOfficial": true,
-    "markdown.extension.toc.levels": "1..2",
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-    },
-    "markdownlint.config": {
-        "MD025": false,
-        "MD033": false,
-        "MD034": false,
-        "MD041": false
-    },
-    "git.autofetch": true,
-    "git.enableSmartCommit": true,
-    "editor.formatOnSave": true,
-    "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)"
+  "workbench.colorTheme": "Mint (Dark)",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.fontFamily": "'Cascadia Code PL', 'CaskaydiaCove Nerd Font'",
+  "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font, 'Cascadia Code PL'",
+  "vsicons.presets.tsOfficial": true,
+  "markdown.extension.toc.levels": "1..2",
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "markdownlint.config": {
+    "MD025": false,
+    "MD033": false,
+    "MD034": false,
+    "MD041": false
+  },
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "editor.formatOnSave": true,
+  "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
