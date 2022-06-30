@@ -87,7 +87,8 @@ $npm = @{
     message  = "Installing global npm packages"
     command  = "npm install -g"
     programs = @(
-        "touch-cli"
+        "touch-cli",
+        "npm-check-updates"
     )
 }
 

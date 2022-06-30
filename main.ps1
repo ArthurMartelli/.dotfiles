@@ -2,12 +2,14 @@
 
 Set-Location $HOME
 
+$DIR = "$HOME\.dotfiles"
+
 function setupPC {
     # Basic configuration for windows
     
     $reg_settings = @(
         @{
-            path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+            path = "Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
             keys = @(
                 @{
                     name    = "AppsUseLightTheme"
@@ -17,7 +19,7 @@ function setupPC {
             )
         },
         @{
-            path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+            path = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
             keys = @(
                 @{
                     name    = "TaskbarAl"
@@ -78,7 +80,7 @@ function setupPC {
             )
         },
         @{
-            path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search"
+            path = "Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search"
             keys = @(
                 @{
                     name    = "SearchboxTaskbarMode"
@@ -139,9 +141,9 @@ function setupGit {
     Invoke-Expression "git clone 'https://github.com/ArthurMartelli/.dotfiles' $HOME\.dotfiles"
 }
 
-function runScripts {
-    # Run all scripts in .\scripts\*.ps1
-    Get-ChildItem -Path "$HOME\.dotfiles\scripts\*.ps1" | Foreach-Object {
+function runSetup {
+    # Run all scripts in .\setup\*.ps1
+    Get-ChildItem -Path "$DIR\setup\*.ps1" | Foreach-Object {
         Pause
         Write-Output $_.FullName
         Update-SessionEnvironment
@@ -151,7 +153,7 @@ function runScripts {
 function createSymlink {
     # Make sybmbolik links for files
     Write-Output "Creating Symbolic Link"
-    Invoke-Expression "Python scripts/setup.py"
+    Invoke-Expression "Python setup/setup.py"
     Update-SessionEnvironment
 }
 
@@ -173,14 +175,22 @@ function hideDotfiles {
     }
 }
 
+function customScriptsPath {
+    $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name "path").path
+    $scripts_path = "$DIR\scripts"
+    $newpath = "$oldpath;$scripts_path"
+    Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name "path" -Value $newpath
+}
+
 function Main {
     setupPC
     installWinGet
     setupChocolatey
     setupGit
-    runScripts
+    runSetup
     createSymlink
     setupPrograms
+    customScriptsPath
 }
 
 Main
