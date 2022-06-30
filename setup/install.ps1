@@ -65,7 +65,8 @@ $winget = @{
         "Blitz.Blitz",
         "Microsoft.WindowsTerminal",
         "Microsoft.PowerShell",
-        "9PH29FZMQK7T"  # Shiori for Genshin
+        "Shiori for Genshin",
+        "Microsoft Whiteboard"
     )
 }
 
