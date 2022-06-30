@@ -1,5 +1,4 @@
-" Enable type file detection. Vim will be able to try to detect the type of
-" file in use.
+" Enable type file detection. Vim will be able to try to detect the type of file in use.
 filetype on
 
 " Enable plugins and load plugin for the detected file type.
