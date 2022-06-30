@@ -175,12 +175,6 @@ function hideDotfiles {
     }
 }
 
-function customScriptsPath {
-    $oldpath = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name "path").path
-    $scripts_path = "$DIR\scripts"
-    $newpath = "$oldpath;$scripts_path"
-    Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name "path" -Value $newpath
-}
 
 function Main {
     setupPC
@@ -190,7 +184,6 @@ function Main {
     runSetup
     createSymlink
     setupPrograms
-    customScriptsPath
 }
 
 Main
