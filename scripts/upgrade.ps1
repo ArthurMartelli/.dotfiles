@@ -9,7 +9,6 @@ function UpgradePackages {
     begin {}
 
     process {
-    
         foreach ($package in $packages) {
             Write-Output "Upgrading all packages in $($package.name)"
             Invoke-Expression $package.command
@@ -28,7 +27,7 @@ $packages = @(
     },
     @{
         name    = "PIP"
-        command = "pip freeze | %{$_.split('==')[0]} | %{pip install --upgrade $_}"
+        command = "pip list --format=freeze | ForEach-Object { ($_ -split '==')[0] } | ForEach-Object { pip install --upgrade $_ }"
     },
     @{
         name    = "NPM"
