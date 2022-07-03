@@ -54,7 +54,8 @@ $choco = @{
         "unzip",
         "microsoft-office-deployment",
         "microsoft-teams",
-        "virtualbox"
+        "virtualbox",
+        "revo-uninstaller"
     )
 }
 
