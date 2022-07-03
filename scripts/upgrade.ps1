@@ -12,12 +12,18 @@ function UpgradePackages {
         foreach ($package in $packages) {
             Write-Output "Upgrading all packages in $($package.name)"
             Invoke-Expression $package.command
+            RefreshEnv
         }
     }
 
     end {
         exit
     }
+}
+
+function Upgradepip {
+    # Not sure why, but using IEX on this expression as a String will not work.
+    pip freeze | ForEach-Object { pip install --upgrade ($_ -split '==')[0] }
 }
 
 $packages = @(
@@ -27,7 +33,7 @@ $packages = @(
     },
     @{
         name    = "PIP"
-        command = "pip list --format=freeze | ForEach-Object { ($_ -split '==')[0] } | ForEach-Object { pip install --upgrade $_ }"
+        command = "Upgradepip"
     },
     @{
         name    = "NPM"
