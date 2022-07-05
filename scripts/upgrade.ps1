@@ -23,7 +23,7 @@ function UpgradePackages {
 
 function Upgradepip {
     # Not sure why, but using IEX on this expression as a String will not work.
-    pip freeze | ForEach-Object { pip install --upgrade ($_ -split '==')[0] }
+    pip list --outdated --format=freeze | ForEach-Object { pip install --upgrade ($_ -split '==')[0] }
 }
 
 $packages = @(
