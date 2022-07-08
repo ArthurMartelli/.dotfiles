@@ -1,7 +1,8 @@
 #Requires -RunAsAdministrator
 
-Set-Location $HOME
+$message = "Setting up your PC"
 
+Set-Location $HOME
 $DIR = "$HOME\.dotfiles"
 
 function setupPC {
@@ -177,6 +178,8 @@ function hideDotfiles {
 
 
 function Main {
+    Write-Host $message
+    
     setupPC
     installWinGet
     setupChocolatey

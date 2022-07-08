@@ -1,7 +1,10 @@
 #Requires -RunAsAdministrator
 
+$message = "Uninstalling some Windows Programs"
+
 function uninstall {
     param (
+        [Parameter(Mandatory = $true)]
         $packages
     )
     Write-Output packages.message
@@ -40,6 +43,8 @@ $windows_packages = @{
 }
 
 function Main {
+    Write-Host $message
+
     uninstall $windows_packages    
 }
 

@@ -6,18 +6,10 @@ function UpgradePackages {
         $packages
     )
 
-    begin {}
-
-    process {
-        foreach ($package in $packages) {
-            Write-Output "Upgrading all packages in $($package.name)"
-            Invoke-Expression $package.command
-            RefreshEnv
-        }
-    }
-
-    end {
-        exit
+    foreach ($package in $packages) {
+        Write-Output "Upgrading all packages in $($package.name)"
+        Invoke-Expression $package.command
+        RefreshEnv
     }
 }
 

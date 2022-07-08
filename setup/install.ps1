@@ -1,5 +1,64 @@
 #Requires -RunAsAdministrator
 
+$message = "Installing Programs"
+
+function install {
+
+    param (
+        [Parameter(Mandatory = $true)]
+        $packages
+    )
+    Write-Output $packages.message
+
+    $command = $packages.command
+    $count = 0
+    $total = $packages.programs.Length
+
+    $q_choices = @(
+        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Install this program")
+        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Install this and all further programs")
+        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Don't install this program")
+        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Don't install this or any further program")
+    )
+
+    $g_confirm = 0
+
+    foreach ($item in $packages.programs) {
+
+        $count += 1
+        $percent = ($count / $total).tostring("P")
+        
+        if ($g_confirm -eq 1) {
+            Write-Output ("($percent) [$count - $total] Installing $item")
+            Invoke-Expression "${command} ${item}"
+            continue
+        }
+        
+        $q_title = "Installation of $item"
+        $q_question = "Do you want to proceed?"
+        $decision = $Host.UI.PromptForChoice($q_title, $q_question, $q_choices, 2)
+            
+        switch ($decision) {
+            0 {
+                Write-Output ("($percent) [$count - $total] Installing $item")
+                Invoke-Expression "${command} ${item}" 
+            }
+            1 {
+                $g_confirm = 1
+                Write-Output ("($percent) [$count - $total] Installing $item")
+                Invoke-Expression "${command} ${item}"
+            }
+            2 {
+                Write-Output ("($percent) [$count - $total] Skipping $item")
+            }
+            3 {
+                Write-Output ("Skipping all further installations")
+                return
+            }
+        }
+    }
+}
+
 $choco = @{
     message  = "Installing programs with Chocolatey"
     command  = "choco install"
@@ -71,7 +130,6 @@ $winget = @{
     )
 }
 
-
 $pip = @{
     message  = "Installing pip packages"
     command  = "pip install"
@@ -134,63 +192,9 @@ $vscode = @{
     )
 }
 
-function install {
-
-    param (
-        $packages
-    )
-    Write-Output $packages.message
-
-    $command = $packages.command
-    $count = 0
-    $total = $packages.programs.Length
-
-    $q_choices = @(
-        [System.Management.Automation.Host.ChoiceDescription]::new("&Yes", "Install this program")
-        [System.Management.Automation.Host.ChoiceDescription]::new("Yes to &All", "Install this and all further programs")
-        [System.Management.Automation.Host.ChoiceDescription]::new("&No", "Don't install this program")
-        [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Don't install this or any further program")
-    )
-
-    $g_confirm = 0
-
-    foreach ($item in $packages.programs) {
-
-        $count += 1
-        $percent = ($count / $total).tostring("P")
-        
-        if ($g_confirm -eq 1) {
-            Write-Output ("($percent) [$count - $total] Installing $item")
-            Invoke-Expression "${command} ${item}"
-            continue
-        }
-        
-        $q_title = "Installation of $item"
-        $q_question = "Do you want to proceed?"
-        $decision = $Host.UI.PromptForChoice($q_title, $q_question, $q_choices, 2)
-            
-        switch ($decision) {
-            0 {
-                Write-Output ("($percent) [$count - $total] Installing $item")
-                Invoke-Expression "${command} ${item}" 
-            }
-            1 {
-                $g_confirm = 1
-                Write-Output ("($percent) [$count - $total] Installing $item")
-                Invoke-Expression "${command} ${item}"
-            }
-            2 {
-                Write-Output ("($percent) [$count - $total] Skipping $item")
-            }
-            3 {
-                Write-Output ("Skipping all further installations")
-                return
-            }
-        }
-    }
-}
-
 function Main {
+    Write-Host $message
+
     install $choco
     install $winget
     install $pip
