@@ -20,5 +20,6 @@
   "powershell.powerShellDefaultVersion": "Windows PowerShell (x86)",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "window.zoomLevel": 1
 }
