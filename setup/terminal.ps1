@@ -17,28 +17,18 @@ function installRequirements {
 function setupTerminals {
     param (
         [Parameter(Mandatory = $true)]
-        $terminals
-    )
-    
-    foreach ($terminal in $terminals) {
-        New-Item -ItemType SymbolicLink -Path $terminal.path -Target $terminal.src -Force
-    }
-}
-
-function setupProfile {
-    param (
+        $terminals,
         [Parameter(Mandatory = $true)]
         $theme
+        # run 'Get-PoshThemes' in powershell to print the themes or look them at https://ohmyposh.dev/docs/themes/
     )
-    # run 'Get-PoshThemes' in powershell to print the themes or look them at https://ohmyposh.dev/docs/themes/
     
-    $profile_content = @(
-        "oh-my-posh init pwsh --config 'C:\Program Files (x86)\oh-my-posh\themes\$theme.omp.json' | Invoke-Expression",
-        "Import-Module -Name Terminal-Icons",
-        "Clear-Host"
-    )
-        
-    Set-Content -Path $PROFILE -Value $profile_content
+    $profile_path = "$HOME/.profile"
+
+    foreach ($terminal in $terminals) {
+        New-Item -ItemType SymbolicLink -Path $terminal.path -Target $terminal.src -Force
+        New-Item -ItemType SymbolicLink -Path $terminal.profile -Target $profile_path -Force
+    }
 }
 
 $programs = @(
@@ -68,38 +58,32 @@ $programs = @(
     },
     @{
         name    = "Terminal icons"
-        install = "Install-Module -Name Terminal-Icons -Repository PSGallery"
+        install = "Install-Module -Name Terminal-Icons -Repository PSGallery -Force"
     }
 )
 
 $terminals = @(
     @{
-        name = "wt"
-        path = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-        src  = "$HOME\.wtconfig"
+        name    = "wt"
+        path    = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+        profile = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+        src     = "$HOME\.wtconfig"
     },
     @{
-        name = "vscode"
-        path = "$HOME\AppData\Roaming\Code\User\settings.json"
-        src  = "$HOME\.vscodeconfig"
-    },
-    @{
-        name = "profile"
-        path = $PROFILE
-        src  = "$HOME\.profile"
+        name    = "vscode"
+        path    = "$HOME\AppData\Roaming\Code\User\settings.json"
+        profile = "$HOME\Documents\PowerShell\Microsoft.VSCode_profile.ps1"
+        src     = "$HOME\.vscodeconfig"
     }
 )
 
-$profile_theme = 'nordtron'
 
 
 function Main {
     Write-Host $message
-
-
+    $profile_theme = 'nordtron'
     installRequirements $programs
-    setupTerminals $terminals
-    setupProfile $profile_theme
+    setupTerminals $terminals $profile_theme
 }
 
 Main
