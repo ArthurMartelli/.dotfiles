@@ -2,7 +2,6 @@
 
 $message = "Setting up your PC"
 
-Set-Location $HOME
 $DIR = "$HOME\.dotfiles"
 
 function setupPC {
@@ -10,8 +9,9 @@ function setupPC {
     
     $reg_settings = @(
         @{
-            path = "Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
-            keys = @(
+            level = "HKEY_CURRENT_USER"
+            path  = "SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+            keys  = @(
                 @{
                     name    = "AppsUseLightTheme"
                     value   = 0
@@ -20,8 +20,14 @@ function setupPC {
             )
         },
         @{
-            path = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
-            keys = @(
+            level = @(
+                "HKEY_CURRENT_USER",
+                "HKEY_LOCAL_MACHINE"
+            )
+            path  = @(
+                "SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+            )
+            keys  = @(
                 @{
                     name    = "TaskbarAl"
                     value   = 0
@@ -63,6 +69,11 @@ function setupPC {
                     comment = "Dont track docs on start menu"
                 },
                 @{
+                    name    = "Start_TrackProgs"
+                    value   = 0
+                    comment = "Dont track docs on start menu"
+                },
+                @{
                     name    = "ShowTaskViewButton"
                     value   = 0
                     comment = "Hide the task view button on the taskbar"
@@ -81,8 +92,9 @@ function setupPC {
             )
         },
         @{
-            path = "Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search"
-            keys = @(
+            level = "HKEY_CURRENT_USER"
+            path  = "SOFTWARE\Microsoft\Windows\CurrentVersion\Search"
+            keys  = @(
                 @{
                     name    = "SearchboxTaskbarMode"
                     value   = 0
@@ -93,17 +105,22 @@ function setupPC {
     )
 
     foreach ($item in $reg_settings) {
-        $path = $item.path
+        $levels = $item.level
         $keys = $item.keys
+        $path = $item.path
 
-        foreach ($key in $keys) {
-            Write-Output $key.comment
-            Set-ItemProperty -Path $path -Name $key.name -Value $key.value -Type Dword -Force
+        foreach ($level in $levels) {
+            foreach ($key in $keys) {
+                Write-Output "[$level] $($key.comment)"
+
+                $reg_path = "Registry::$level\$path"
+                Set-ItemProperty -Path $reg_path -Name $key.name -Value $key.value -Type Dword -Force
+            }
         }
     }
 
     # Unpin all items from the taskbar
-    Remove-Item "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*"
+    Remove-Item "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*" -ErrorAction SilentlyContinue
 
 }
 
