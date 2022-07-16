@@ -77,8 +77,6 @@ $terminals = @(
     }
 )
 
-
-
 function Main {
     Write-Host $message
     $profile_theme = 'nordtron'

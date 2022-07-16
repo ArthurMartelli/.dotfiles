@@ -70,7 +70,7 @@ function setupPC {
                 },
                 @{
                     name    = "Start_TrackProgs"
-                    value   = 0
+                    value   = 1
                     comment = "Dont track docs on start menu"
                 },
                 @{
@@ -124,7 +124,7 @@ function setupPC {
 
 }
 
-function installWinGet {
+function setupWinGet {
     $hasPackageManager = Get-AppPackage -Name "Microsoft.DesktopAppInstaller"
 
     if (!$hasPackageManager) {
@@ -159,25 +159,18 @@ function setupGit {
     Invoke-Expression "git clone 'https://github.com/ArthurMartelli/.dotfiles' $HOME\.dotfiles"
 }
 
-function runSetup {
+function setupPrograms {
     # Run all scripts in .\setup\*.ps1
     Get-ChildItem -Path "$DIR\setup\*.ps1" | Foreach-Object {
         Pause
-        Write-Output $_.FullName
+        Write-Output "Running $($_.FullName)"
         Update-SessionEnvironment
     }
 }
 
-function createSymlink {
-    # Make sybmbolik links for files
-    Write-Output "Creating Symbolic Link"
-    Invoke-Expression "Python setup/setup.py"
-    Update-SessionEnvironment
-}
-
 # Configure some password manager
 
-function setupPrograms {
+function setupApps {
     # Sets up programs (only bitwarden at the moment)
     Write-Output "Login into bitwarden"
     Invoke-Expression "bw login"
@@ -198,12 +191,11 @@ function Main {
     Write-Host $message
     
     setupPC
-    installWinGet
+    setupWinGet
     setupChocolatey
     setupGit
-    runSetup
-    createSymlink
     setupPrograms
+    setupApps
 }
 
 Main

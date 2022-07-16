@@ -21,15 +21,16 @@ function install {
         [System.Management.Automation.Host.ChoiceDescription]::new("No to A&ll", "Don't install this or any further program")
     )
 
-    $g_confirm = 0
+    $glob_confirm = 0
 
     foreach ($item in $packages.programs) {
 
         $count += 1
         $percent = ($count / $total).tostring("P")
+        $progress = "($percent) [$count - $total]"
         
-        if ($g_confirm -eq 1) {
-            Write-Output ("($percent) [$count - $total] Installing $item")
+        if ($glob_confirm -eq 1) {
+            Write-Output ("$progress Installing $item")
             Invoke-Expression "${command} ${item}"
             continue
         }
@@ -40,16 +41,16 @@ function install {
             
         switch ($decision) {
             0 {
-                Write-Output ("($percent) [$count - $total] Installing $item")
+                Write-Output ("$progress Installing $item")
                 Invoke-Expression "${command} ${item}" 
             }
             1 {
-                $g_confirm = 1
-                Write-Output ("($percent) [$count - $total] Installing $item")
+                $glob_confirm = 1
+                Write-Output ("$progress Installing $item")
                 Invoke-Expression "${command} ${item}"
             }
             2 {
-                Write-Output ("($percent) [$count - $total] Skipping $item")
+                Write-Output ("$progress Skipping $item")
             }
             3 {
                 Write-Output ("Skipping all further installations")
