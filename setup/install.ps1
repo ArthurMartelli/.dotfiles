@@ -86,7 +86,6 @@ $choco = @{
         "sass",
         "autohotkey.portable",
         "miktex",
-        "gitkraken",
         # CLI apps
         "gh",
         "curl",

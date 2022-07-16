@@ -8,14 +8,15 @@ function createSymlink {
     
     ForEach ($FILE in $FILES) {
         $LINK = "$HOME\$($FILE.name)"
-        
+        $STATUS = "{$($FILE.name)}] {$($FILE.fullname)} -> {$LINK}"
+
         try {
-            New-Item -ItemType SymbolicLink -Path $LINK -Target $FILE -Force
+            New-Item -ItemType SymbolicLink -Path $LINK -Target $FILE.fullname -Force
             $(Get-Item $LINK).Attributes += 'Hidden'
-            Write-Output "[CREATED {$($FILE.name)}] {$FILE} -> {$LINK}"
+            Write-Output "[CREATED $STATUS"
         }
         catch {
-            Write-Output "[SKIPPED {$($FILE.name)}] {$FILE} -> {$LINK}"
+            Write-Output "[SKIPPED $STATUS"
         }
         
     }
