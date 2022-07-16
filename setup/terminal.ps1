@@ -26,8 +26,9 @@ function setupTerminals {
     $profile_path = "$HOME/.profile"
 
     foreach ($terminal in $terminals) {
-        New-Item -ItemType SymbolicLink -Path $terminal.path -Target $terminal.src -Force
-        New-Item -ItemType SymbolicLink -Path $terminal.profile -Target $profile_path -Force
+        New-Item -ItemType SymbolicLink -Path $($terminal.path) -Target $($terminal.src) -Force
+        New-Item -ItemType SymbolicLink -Path $($terminal.profile) -Target $profile_path -Force
+        echo "New-Item -ItemType SymbolicLink -Path $($terminal.profile) -Target $profile_path -Force"
     }
 }
 
@@ -66,13 +67,13 @@ $terminals = @(
     @{
         name    = "wt"
         path    = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-        profile = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+        profile = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
         src     = "$HOME\.wtconfig"
     },
     @{
         name    = "vscode"
         path    = "$HOME\AppData\Roaming\Code\User\settings.json"
-        profile = "$HOME\Documents\PowerShell\Microsoft.VSCode_profile.ps1"
+        profile = "$HOME\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1"
         src     = "$HOME\.vscodeconfig"
     }
 )
@@ -80,7 +81,7 @@ $terminals = @(
 function Main {
     Write-Host $message
     $profile_theme = 'nordtron'
-    installRequirements $programs
+    # installRequirements $programs
     setupTerminals $terminals $profile_theme
 }
 
