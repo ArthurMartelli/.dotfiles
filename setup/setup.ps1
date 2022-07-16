@@ -8,14 +8,14 @@ function createSymlink {
     
     ForEach ($FILE in $FILES) {
         $LINK = "$HOME\$($FILE.name)"
-        
+
         try {
-            New-Item -ItemType SymbolicLink -Path $LINK -Target $FILE -Force
+            New-Item -ItemType SymbolicLink -Path $LINK -Target $FILE.fullname -Force
             $(Get-Item $LINK).Attributes += 'Hidden'
-            Write-Output "[CREATED {$($FILE.name)}] {$FILE} -> {$LINK}"
+            Write-Output "[CREATED {$($FILE.name)}] {$($FILE.fullname)} -> {$LINK}"
         }
         catch {
-            Write-Output "[SKIPPED {$($FILE.name)}] {$FILE} -> {$LINK}"
+            Write-Output "[SKIPPED {$($FILE.name)}] {$($FILE.fullname)} -> {$LINK}"
         }
         
     }
@@ -23,13 +23,11 @@ function createSymlink {
 
 $DIR = "$HOME\.dotfiles"
 $DOT_FILES = Get-ChildItem "$DIR\.files"
-$DOT_DIRS = Get-ChildItem "$DIR\.dirs"
 
 function Main {
     Write-Host "Creating SymLinks for config files"
 
     createSymlink $DOT_FILES
-    createSymlink $DOT_DIRS
 }
 
 Main

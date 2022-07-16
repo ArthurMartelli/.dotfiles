@@ -121,7 +121,7 @@ $choco = @{
 
 $winget = @{
     message  = "Installing programs with Winget"
-    comand   = "winget install"
+    command  = "winget install"
     programs = @(
         "Blitz.Blitz",
         "Microsoft.WindowsTerminal",
