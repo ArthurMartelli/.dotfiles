@@ -139,7 +139,8 @@ $pip = @{
         "numpy",
         "pandas",
         "Django",
-        "autopep8"
+        "autopep8",
+        "git+https://github.com/ethanavatar/docsgen-py.git"
     )
 }
 
