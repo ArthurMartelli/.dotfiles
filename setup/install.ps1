@@ -140,7 +140,9 @@ $pip = @{
         "pandas",
         "Django",
         "autopep8",
-        "git+https://github.com/ethanavatar/docsgen-py.git"
+        "git+https://github.com/ethanavatar/docsgen-py.git" ,
+        "gspread",
+        "oauth2client"
     )
 }
 
