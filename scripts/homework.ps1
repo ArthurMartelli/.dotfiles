@@ -1,0 +1,1 @@
+Invoke-Expression "python $HOME/github/homework"
