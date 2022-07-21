@@ -195,6 +195,11 @@ $vscode = @{
     )
 }
 
+function configPrograms {
+    Invoke-Expression "npm config set fund false --global"
+    Invoke-Expression "choco feature enable -n allowGlobalConfirmation"
+}
+
 function Main {
     Write-Host $message
 
@@ -203,6 +208,8 @@ function Main {
     install $pip
     install $npm
     install $vscode
+    configPrograms
+
 }
 
 Main
